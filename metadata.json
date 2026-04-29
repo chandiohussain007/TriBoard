@@ -1,0 +1,6 @@
+{
+  "name": "TriBoard Lite",
+  "description": "Instant strategy board games (Chess, Shogi, Checkers) with real-time multiplayer and bots.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
