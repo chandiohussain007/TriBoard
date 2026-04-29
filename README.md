@@ -1,35 +1,26 @@
-# TriBoard Lite
+# TriBoard Elite
 
-TriBoard Lite is a premium, high-performance strategy board game platform featuring Chess, Shogi, and Checkers. Built for enthusiasts who value instant gameplay, it offers a seamless experience with sophisticated bots and real-time mechanics.
+An ultra-clean, Apple-inspired strategy platform for Chess, Shogi, and Checkers. Featuring high-key glassmorphism, local multiplayer, and realistic tactical audio.
 
 ## Features
+- **High-Key Aesthetic**: Frosted glassmorphism, champagne gradients, and San Francisco-style typography.
+- **Local Versus**: Challenge friends on the same device in Local Combat mode.
+- **Neural Training**: Engage in high-fidelity simulations against state-of-the-art bot profiles.
+- **Tactical Audio**: Realistic wood-impact synthesis for an immersive physical feel.
+- **Smart Hints**: Integrated tactical visualization for legal moves and best-next-step suggestions.
 
-- **Multi-Game Hub**: Play Chess, Shogi, or Checkers in one unified interface.
-- **Ranked Bot System**: Challenge AI opponents ranging from casual players to Grandmaster-level bots.
-- **Instant Matchmaking**: Jump into "Online" matches against randomly selected legendary bots.
-- **Learning Center**: Master the basics of each game with our integrated learning modules.
+## Deployment to Vercel
+1. Push your changes to GitHub (Already done).
+2. Connect your repository to [Vercel](https://vercel.com).
+3. Vercel will automatically detect the **Vite** framework.
+4. Set the **Build Command** to `npm run build` and **Output Directory** to `dist`.
+5. Ensure the **Environment Variables** are set if you plan to connect to a custom backend (Current "Online" mode is optimized for serverless compatibility).
 
-## Tech Stack
+## Local Development
+```bash
+npm install
+npm run dev
+```
 
-- **Frontend**: React 19, TypeScript, Vite
-- **Styling**: Tailwind CSS (Custom Theme)
-- **Logic**: Chess.js, Custom Shogi/Checkers engines
-- **Server**: Express, Socket.io (for real-time signaling)
-
-## Development
-
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Run the development server**:
-   ```bash
-   npm run dev
-   ```
-
-3. **Build for production**:
-   ```bash
-   npm run build
-   ```
-
+---
+Built with Precision by TriBoard Elite.
