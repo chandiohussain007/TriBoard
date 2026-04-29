@@ -55,7 +55,7 @@ export default function GridBoard({
 
   return (
     <div
-      className="w-full aspect-square border-4 border-stone-800 shadow-xl overflow-hidden relative"
+      className="w-full aspect-square border-8 border-white shadow-[0_24px_64px_rgba(0,0,0,0.06)] overflow-hidden relative rounded-2xl inner-glow"
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${cols}, 1fr)`,
@@ -64,11 +64,11 @@ export default function GridBoard({
     >
       {Array.from({ length: rows }).map((_, r) =>
         Array.from({ length: cols }).map((_, c) => {
-          const isDark = boardType === "checker" ? (r + c) % 2 === 1 : false; // Shogi has uniform squares
+          const isDark = boardType === "checker" ? (r + c) % 2 === 1 : false;
           const bgColor =
             isDark || boardType === "shogi"
-              ? darkSquareColor
-              : lightSquareColor;
+              ? "#f8fafc" // Light silver/white
+              : "#ffffff";
 
           const isSelected =
             selectedSquare?.[0] === r && selectedSquare?.[1] === c;
@@ -79,42 +79,37 @@ export default function GridBoard({
             <div
               key={`${r}-${c}`}
               onClick={() => handleSquareClick(r, c)}
-              className="relative flex items-center justify-center cursor-pointer transition-colors"
+              className="relative flex items-center justify-center cursor-pointer transition-all duration-300"
               style={{
-                backgroundColor: boardType === "shogi" ? "#e3c16f" : bgColor,
-                border: boardType === "shogi" ? "1px solid #1c1917" : "none",
+                backgroundColor: boardType === "shogi" ? "#fdfcf0" : bgColor,
+                border: "1px solid #f1f5f9",
               }}
             >
               {isSelected && (
-                <div className="absolute inset-0 bg-yellow-400 opacity-40"></div>
+                <div className="absolute inset-0 bg-zinc-900/5 backdrop-blur-[2px] z-10"></div>
               )}
               {isValidMove && !piece && (
-                <div className="absolute w-1/3 h-1/3 bg-black opacity-20 rounded-full"></div>
+                <div className="absolute w-1/4 h-1/4 bg-zinc-900/10 rounded-full z-10"></div>
               )}
               {isValidMove && piece && (
-                <div className="absolute inset-0 border-4 border-red-500 rounded-full relative z-20"></div>
+                <div className="absolute inset-0 border-4 border-zinc-900/10 rounded-full z-20"></div>
               )}
 
               {piece && (
-                <div className="relative z-10 w-[80%] h-[80%]">
+                <div className="relative z-20 w-[75%] h-[75%] transition-transform duration-500 hover:scale-105">
                   {piece.type === "checker" ? (
                     <div
-                      className={`w-full h-full rounded-full shadow-md border-2 border-black/20 ${piece.player === 1 ? "bg-zinc-800" : "bg-red-600"} flex items-center justify-center`}
+                      className={`w-full h-full rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.08)] border border-zinc-100 ${piece.player === 1 ? "bg-zinc-800" : "bg-white"} flex items-center justify-center inner-glow`}
                     >
                       {piece.isKing && (
-                        <div className="w-1/2 h-1/2 rounded-full border border-white/50"></div>
+                        <div className={`w-1/2 h-1/2 rounded-full border ${piece.player === 1 ? "border-white/20" : "border-zinc-200"}`}></div>
                       )}
                     </div>
                   ) : (
-                    // Shogi Piece Placeholder
                     <div
-                      className={`w-full h-full flex flex-col items-center justify-center font-bold text-xl clip-path-shogi-piece bg-[#edd5a1] border border-stone-600 shadow-sm ${piece.player === 2 ? "rotate-180" : ""}`}
-                      style={{
-                        clipPath:
-                          "polygon(50% 0%, 100% 20%, 90% 100%, 10% 100%, 0% 20%)",
-                      }}
+                      className={`w-full h-full flex flex-col items-center justify-center font-bold text-lg clip-path-shogi-piece bg-white border border-zinc-100 shadow-[0_4px_12px_rgba(0,0,0,0.05)] text-zinc-800 ${piece.player === 2 ? "rotate-180" : ""} inner-glow`}
                     >
-                      {piece.symbol}
+                      <span className="opacity-80">{piece.symbol}</span>
                     </div>
                   )}
                 </div>
@@ -126,3 +121,4 @@ export default function GridBoard({
     </div>
   );
 }
+

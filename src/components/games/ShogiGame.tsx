@@ -79,11 +79,13 @@ const getValidShogiMoves = (
 
 export default function ShogiGame({
   mode,
-  botLevel,
-  roomId,
   playerColor,
   onGameOver,
-}: any) {
+}: {
+  mode: "bot" | "online" | "local";
+  playerColor: "w" | "b";
+  onGameOver: (result: string) => void;
+}) {
   const [board, setBoard] = useState(createInitialShogiState());
   const [turn, setTurn] = useState<1 | 2>(1);
   const [selected, setSelected] = useState<[number, number] | null>(null);
@@ -94,8 +96,7 @@ export default function ShogiGame({
 
   const handleMove = (
     from: [number, number],
-    to: [number, number],
-    isIncoming = false,
+    to: [number, number]
   ) => {
     const newBoard = board.map((row) => [...row]);
     const piece = newBoard[from[0]][from[1]]!;
@@ -113,33 +114,13 @@ export default function ShogiGame({
 
     setBoard(newBoard);
     setTurn(turn === 1 ? 2 : 1);
-
-    if (mode === "online" && !isIncoming && roomId) {
-      socket.emit("send_move", { roomId, move: { from, to } });
-    }
   };
 
   const onGridMove = (from: [number, number], to: [number, number]) => {
-    if (mode === "online") {
-      const myTurnVal = playerColor === "w" ? 1 : 2;
-      if (turn !== myTurnVal) return;
-    }
     handleMove(from, to);
   };
 
-  useEffect(() => {
-    if (mode === "online") {
-      const onReceiveMove = ({ move }: any) => {
-        handleMove(move.from, move.to, true);
-      };
-      socket.on("receive_move", onReceiveMove);
-      return () => {
-        socket.off("receive_move", onReceiveMove);
-      };
-    }
-  }, [mode, board, turn]);
-
-  // Bot move
+  // Bot move logic
   useEffect(() => {
     if (mode === "bot" && turn === 2) {
       const timer = setTimeout(() => {
@@ -163,18 +144,13 @@ export default function ShogiGame({
         } else {
           onGameOver("Shogi - Player 1 Wins");
         }
-      }, 600);
+      }, 800);
       return () => clearTimeout(timer);
     }
   }, [turn, mode, board]);
 
-  const isFlipped = mode === "online" && playerColor === "b";
-
   return (
-    <div
-      className={`w-full max-w-[600px] mx-auto flex gap-4 ${isFlipped ? "rotate-180" : ""}`}
-    >
-      <div className={isFlipped ? "rotate-180 w-full" : "w-full"}>
+    <div className="w-full max-w-[720px] mx-auto">
         <GridBoard
           rows={9}
           cols={9}
@@ -185,7 +161,7 @@ export default function ShogiGame({
           validMoves={validMoves}
           boardType="shogi"
         />
-      </div>
     </div>
   );
 }
+

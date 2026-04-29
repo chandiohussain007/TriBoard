@@ -1,20 +1,35 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# TriBoard Lite
 
-# Run and deploy your AI Studio app
+TriBoard Lite is a premium, high-performance strategy board game platform featuring Chess, Shogi, and Checkers. Built for enthusiasts who value instant gameplay, it offers a seamless experience with sophisticated bots and real-time mechanics.
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/a7caf865-d668-4b1c-bf87-7843f27a6ed7
+- **Multi-Game Hub**: Play Chess, Shogi, or Checkers in one unified interface.
+- **Ranked Bot System**: Challenge AI opponents ranging from casual players to Grandmaster-level bots.
+- **Instant Matchmaking**: Jump into "Online" matches against randomly selected legendary bots.
+- **Learning Center**: Master the basics of each game with our integrated learning modules.
 
-## Run Locally
+## Tech Stack
 
-**Prerequisites:**  Node.js
+- **Frontend**: React 19, TypeScript, Vite
+- **Styling**: Tailwind CSS (Custom Theme)
+- **Logic**: Chess.js, Custom Shogi/Checkers engines
+- **Server**: Express, Socket.io (for real-time signaling)
 
+## Development
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
